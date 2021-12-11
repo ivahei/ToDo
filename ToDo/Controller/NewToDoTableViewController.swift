@@ -9,12 +9,14 @@ import UIKit
 
 class NewToDoTableViewController: UITableViewController {
     
+    var todo: ToDo?
+    var isSelected = false
     var isDatePickerHiden = true
     let dueDateIndexPath = IndexPath(row: 0, section: 1)
     let dueDatePickerIndexPath = IndexPath(row: 1, section: 1)
 
     
-    @IBOutlet private var remindMeTextFieldMark: UIImageView!
+    @IBOutlet private var isComplite: UIButton!
     @IBOutlet private var remindMeTextFieldOutlet: UITextField!
     @IBOutlet private var saveButtonOutlet: UIBarButtonItem!
     @IBOutlet private var dueDate: UILabel!
@@ -42,22 +44,48 @@ class NewToDoTableViewController: UITableViewController {
         }
     }
     
+    @IBAction func returnPressed(_ sender: UITextField) {
+        sender.resignFirstResponder()
+    }
+    
     @IBAction func datePickerChanged(_ sender: UIDatePicker) {
         updateDueDate(sender.date)
     }
     
     func ckeckRemindMeTextField() {
         if remindMeTextFieldOutlet.text!.isEmpty {
-            remindMeTextFieldMark.image = UIImage(systemName: "circlebadge")
             saveButtonOutlet.isEnabled = false
         } else {
-            remindMeTextFieldMark.image = UIImage(systemName: "checkmark.circle.fill")
             saveButtonOutlet.isEnabled = true
         }
     }
     
+    @IBAction func isCompleteButtonTapped(_ sender: Any) {
+        if isSelected {
+            isSelected.toggle()
+            isComplite.setImage(UIImage(systemName: "circlebadge"), for: .normal)
+        } else {
+            isSelected.toggle()
+            isComplite.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        }
+    }
+    
+    
     func updateDueDate(_ date: Date) {
         dueDate.text = ToDo.dueDateFormatter.string(from: date)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        guard segue.identifier == "saveUnwind" else { return }
+        
+        let title = remindMeTextFieldOutlet.text!
+        let isComplete = isSelected
+        let dueDate = dueDatePickerView.date
+        let notes = notesTextView.text
+        
+        todo = ToDo(title: title, isComplete: isComplete, dueDate: dueDate, notes: notes)
     }
 }
 

@@ -16,11 +16,7 @@ class ToDoTableViewController: UITableViewController {
         
         navigationItem.leftBarButtonItem = editButtonItem
         
-        if let savedToDos = ToDo.loadToDos() {
-            todos = savedToDos
-        } else {
-            todos = ToDo.loadSumpleToDos()
-        }
+        todos = ToDo.loadToDos() ?? ToDo.loadSumpleToDos()
     }
     
     @IBAction func unwindToDoList(segue: UIStoryboardSegue) {

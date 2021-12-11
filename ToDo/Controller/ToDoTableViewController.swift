@@ -59,8 +59,9 @@ extension ToDoTableViewController {
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier",
-                                                 for: indexPath)
-        cell.textLabel?.text = todos[indexPath.row].title
+                                                 for: indexPath) as! ToDoTableViewCell
+        cell.toDoTitle.text = todos[indexPath.row].title
+        cell.isCompleteButton.isSelected = todos[indexPath.row].isComplete
 
         return cell
     }

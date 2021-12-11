@@ -17,14 +17,43 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoCellIdentifier" id="DDX-eF-rMy">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoCellIdentifier" id="DDX-eF-rMy" customClass="ToDoTableViewCell" customModule="ToDo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="53.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DDX-eF-rMy" id="lF9-s5-j6S">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="53.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="eh5-D3-t79">
+                                            <rect key="frame" x="20" y="11" width="374" height="31.5"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fdf-xg-4NL">
+                                                    <rect key="frame" x="0.0" y="0.0" width="44" height="31.5"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="circle" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="completeButtonTapped:" destination="DDX-eF-rMy" eventType="touchUpInside" id="XAj-0B-vcs"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yfb-sC-khd">
+                                                    <rect key="frame" x="48" y="0.0" width="326" height="31.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="eh5-D3-t79" secondAttribute="bottom" id="8k6-H3-7S5"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="eh5-D3-t79" secondAttribute="trailing" id="f8v-AI-QEL"/>
+                                        <constraint firstItem="eh5-D3-t79" firstAttribute="top" secondItem="lF9-s5-j6S" secondAttribute="topMargin" id="mY2-np-LSH"/>
+                                        <constraint firstItem="eh5-D3-t79" firstAttribute="leading" secondItem="lF9-s5-j6S" secondAttribute="leadingMargin" id="tUO-wT-kij"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="isCompleteButton" destination="fdf-xg-4NL" id="W0H-M4-7XD"/>
+                                    <outlet property="toDoTitle" destination="Yfb-sC-khd" id="UUB-YH-pm8"/>
                                     <segue destination="Pta-4v-kwd" kind="presentation" id="TMe-VH-UPS"/>
                                 </connections>
                             </tableViewCell>

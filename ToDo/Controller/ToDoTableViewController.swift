@@ -14,24 +14,11 @@ class ToDoTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.leftBarButtonItem = editButtonItem
-        
-        if let savedToDos = ToDo.loadToDos() {
-            todos = savedToDos
-        } else {
-            todos = ToDo.loadSumpleToDos()
-        }
+        todos = ToDo.loadToDos() ?? ToDo.loadSumpleToDos()
     }
     
-    @IBAction func unwindToDoList(segue: UIStoryboardSegue) {
-        
-    }
-}
-
-extension ToDoTableViewController {
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return todos.count
     }
 

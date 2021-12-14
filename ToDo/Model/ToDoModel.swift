@@ -15,6 +15,13 @@ struct ToDo: Equatable {
     var dueDate: Date
     var notes: String?
     
+    static let dueDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        return formatter
+    }()
+    
     static func loadToDos() -> [ToDo]? {
         return nil
     }

@@ -14,6 +14,8 @@ class ToDoTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.leftBarButtonItem = editButtonItem
+      
         todos = ToDo.loadToDos() ?? ToDo.loadSumpleToDos()
     }
     

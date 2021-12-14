@@ -15,7 +15,7 @@ class ToDoTableViewController: UITableViewController {
         super.viewDidLoad()
         
         navigationItem.leftBarButtonItem = editButtonItem
-        
+      
         todos = ToDo.loadToDos() ?? ToDo.loadSumpleToDos()
     }
     
@@ -35,7 +35,6 @@ class ToDoTableViewController: UITableViewController {
 extension ToDoTableViewController {
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return todos.count
     }
 

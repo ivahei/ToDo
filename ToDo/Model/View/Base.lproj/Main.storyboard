@@ -24,6 +24,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Pta-4v-kwd" kind="presentation" id="TMe-VH-UPS"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -35,12 +38,14 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="52i-0g-AHs"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1zX-nO-JQ3">
                             <connections>
+                                <action selector="editToDo:" destination="X10-6p-hFp" id="6Iq-Jb-iKO"/>
                                 <segue destination="Pta-4v-kwd" kind="presentation" id="f6y-sI-gPU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nHH-Xb-tn3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="X10-6p-hFp" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="916" y="781"/>
         </scene>
@@ -226,12 +231,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="j8w-9h-iit" kind="relationship" relationship="rootViewController" id="XFo-na-jOh"/>
+                        <segue destination="j8w-9h-iit" kind="relationship" relationship="rootViewController" destinationCreationSelector="editToDo:sender:" id="XFo-na-jOh"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C0o-oT-DCK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1688" y="781"/>
+            <point key="canvasLocation" x="1719" y="781"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qTb-9a-ged">
@@ -250,6 +255,9 @@
             <point key="canvasLocation" x="21" y="781"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="TMe-VH-UPS"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="circle" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">

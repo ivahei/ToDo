@@ -15,13 +15,12 @@ class NewToDoTableViewController: UITableViewController {
     let dueDateIndexPath = IndexPath(row: 0, section: 1)
     let dueDatePickerIndexPath = IndexPath(row: 1, section: 1)
 
-    
     @IBOutlet private var isComplite: UIButton!
     @IBOutlet private var remindMeTextFieldOutlet: UITextField!
     @IBOutlet private var saveButtonOutlet: UIBarButtonItem!
     @IBOutlet private var dueDate: UILabel!
     @IBOutlet private var dueDatePickerView: UIDatePicker!
-    @IBOutlet var notesTextView: UITextView!
+    @IBOutlet private var notesTextView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,22 +33,13 @@ class NewToDoTableViewController: UITableViewController {
             notesTextView.text = todo.notes
         } else {
             saveButtonOutlet.isEnabled = false
-            dueDatePickerView.date = Date().addingTimeInterval(1*60*60)
+            dueDatePickerView.date = Calendar.current.date(byAdding: .hour, value: 1, to: Date()) ?? Date()
         }
         updateDueDate(dueDatePickerView.date)
     }
     
     @IBAction func remindMeTextFieldEditingChanged(_ sender: Any) {
-        ckeckRemindMeTextField()
-    }
-    
-    // uzum em es text field@ edit skseluc yete bac lini date picker@ paki bayc xndir ka reloadic heto editing@ kangnum a.
-    // nuyn@ notes-i mej kanei yete ashxater
-    @IBAction func remindMeTextFieldEditingDidBegin(_ sender: Any) {
-        if !isDatePickerHiden {
-            isDatePickerHiden = true
-            tableView.reloadData()
-        }
+        checkRemindMeTextField()
     }
     
     @IBAction func returnPressed(_ sender: UITextField) {
@@ -60,7 +50,7 @@ class NewToDoTableViewController: UITableViewController {
         updateDueDate(sender.date)
     }
     
-    func ckeckRemindMeTextField() {
+    func checkRemindMeTextField() {
         if remindMeTextFieldOutlet.text!.isEmpty {
             saveButtonOutlet.isEnabled = false
         } else {
@@ -69,16 +59,15 @@ class NewToDoTableViewController: UITableViewController {
     }
     
     @IBAction func isCompleteButtonTapped(_ sender: Any) {
-        if isSelected {
-            isSelected.toggle()
-            isComplite.setImage(UIImage(systemName: "circlebadge"), for: .normal)
-        } else {
-            isSelected.toggle()
-            isComplite.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-        }
+
+        isSelected.toggle()
+
+        let image = isSelected ?
+        UIImage(systemName: "circlebadge") : UIImage(systemName: "checkmark.circle.fill")
+
+        isComplite.setImage(image, for: .normal)
     }
-    
-    
+
     func updateDueDate(_ date: Date) {
         dueDate.text = ToDo.dueDateFormatter.string(from: date)
     }
@@ -86,9 +75,10 @@ class NewToDoTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
-        guard segue.identifier == "saveUnwind" else { return }
-        
-        let title = remindMeTextFieldOutlet.text!
+        guard segue.identifier == "saveUnwind",
+              let title = remindMeTextFieldOutlet.text
+        else { return }
+
         let isComplete = isSelected
         let dueDate = dueDatePickerView.date
         let notes = notesTextView.text

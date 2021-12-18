@@ -7,23 +7,24 @@
 
 import UIKit
 
+// MARK: - ToDoTableViewController
+
 class ToDoTableViewController: UITableViewController {
-    
     var todos = [ToDo]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         navigationItem.leftBarButtonItem = editButtonItem
-        
+
         todos = ToDo.loadToDos() ?? ToDo.loadSumpleToDos()
     }
-    
+
     @IBAction func unwindToDoList(segue: UIStoryboardSegue) {
         guard segue.identifier == "saveUnwind" else { return }
-        let sourceViewController = segue.source as! NewToDoTableViewController
-        
-        if let todo = sourceViewController.todo {
+        let sourceViewController = segue.source as? NewToDoTableViewController
+
+        if let todo = sourceViewController?.todo {
             if let indexOfExistingToDo = todos.firstIndex(of: todo) {
                 todos[indexOfExistingToDo] = todo
                 tableView.insertRows(at: [IndexPath(row: indexOfExistingToDo, section: 0)], with: .automatic)
@@ -34,16 +35,17 @@ class ToDoTableViewController: UITableViewController {
             }
         }
     }
-    
-    
+
     @IBSegueAction func editToDo(_ coder: NSCoder, sender: Any?) -> NewToDoTableViewController? {
         guard let cell = sender as? UITableViewCell,
-              let indexPath = tableView.indexPath(for: cell) else { return nil}
+              let indexPath = tableView.indexPath(for: cell)
+        else { return nil }
+
         tableView.deselectRow(at: indexPath, animated: true)
-        
+
         let editVC = NewToDoTableViewController(coder: coder)
         editVC?.todo = todos[indexPath.row]
-        
+
         return editVC
     }
 }
@@ -63,11 +65,9 @@ extension ToDoTableViewController {
         return cell
     }
 
-    override func tableView(_ tableView: UITableView,
-                            canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath)
+        -> Bool { true }
+
     override func tableView(_ tableView: UITableView,
                             commit editingStyle: UITableViewCell.EditingStyle,
                             forRowAt indexPath: IndexPath) {

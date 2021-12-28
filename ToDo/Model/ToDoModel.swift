@@ -8,7 +8,7 @@
 import Foundation
 
 struct ToDo: Equatable {
-    let id = UUID()
+    let id: String
     var title: String
     var isComplete: Bool
     var dueDate: Date
@@ -25,15 +25,15 @@ struct ToDo: Equatable {
         return nil
     }
 
-    static func loadSumpleToDos() -> [ToDo] {
+    static func loadSampleToDos() -> [ToDo] {
         [
-            ToDo(title: "Eat", isComplete: true, dueDate: Date(), notes: "I am hungry"),
-            ToDo(title: "Swim", isComplete: false, dueDate: Date(), notes: "I am dirty"),
-            ToDo(title: "Brush my teeth", isComplete: false, dueDate: Date(), notes: "My breath smells bad")
+            ToDo(id: UUID().uuidString, title: "Eat", isComplete: true, dueDate: Date(), notes: "I am hungry"),
+            ToDo(id: UUID().uuidString, title: "Swim", isComplete: false, dueDate: Date(), notes: "I am dirty"),
+            ToDo(id: UUID().uuidString, title: "Brush my teeth", isComplete: false, dueDate: Date(), notes: "My breath smells bad")
         ]
     }
 
-    static func ==(lhs: ToDo, rhs: ToDo) -> Bool {
+    static func ==(lhs: Self, rhs: Self) -> Bool {
         return lhs.id == rhs.id
     }
 }

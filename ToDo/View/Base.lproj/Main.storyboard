@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TjQ-MU-7Ew">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TjQ-MU-7Ew">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,26 +17,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoCellIdentifier" id="DDX-eF-rMy" customClass="ToDoTableViewCell" customModule="ToDo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="53.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ToDoCellIdentifier" id="DDX-eF-rMy" customClass="ToDoTableViewCell" customModule="ToDo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="44.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DDX-eF-rMy" id="lF9-s5-j6S">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="53.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="eh5-D3-t79">
-                                            <rect key="frame" x="20" y="11" width="374" height="31.5"/>
+                                            <rect key="frame" x="20" y="11" width="374" height="22.5"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fdf-xg-4NL">
-                                                    <rect key="frame" x="0.0" y="0.0" width="44" height="31.5"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="circle" catalog="system"/>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fdf-xg-4NL">
+                                                    <rect key="frame" x="0.0" y="0.0" width="20" height="22.5"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" image="circle" catalog="system"/>
+                                                    <state key="selected" image="checkmark.circle.fill" catalog="system"/>
                                                     <connections>
                                                         <action selector="completeButtonTapped:" destination="DDX-eF-rMy" eventType="touchUpInside" id="XAj-0B-vcs"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yfb-sC-khd">
-                                                    <rect key="frame" x="48" y="0.0" width="326" height="31.5"/>
+                                                    <rect key="frame" x="24" y="0.0" width="350" height="22.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -99,16 +100,15 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="XTy-nX-wzU">
                                                     <rect key="frame" x="20" y="11" width="374" height="34.5"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="17G-pI-j8b">
-                                                            <rect key="frame" x="0.0" y="2" width="44" height="31"/>
-                                                            <state key="normal" title="Button"/>
-                                                            <buttonConfiguration key="configuration" style="plain" image="circle" catalog="system"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="17G-pI-j8b">
+                                                            <rect key="frame" x="0.0" y="0.5" width="30" height="34"/>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <connections>
                                                                 <action selector="isCompleteButtonTapped:" destination="j8w-9h-iit" eventType="touchUpInside" id="9Ho-P5-VDe"/>
                                                             </connections>
                                                         </button>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Remind me to.." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Zm3-YI-Aw3">
-                                                            <rect key="frame" x="48" y="0.5" width="326" height="34"/>
+                                                            <rect key="frame" x="34" y="0.5" width="340" height="34"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                             <connections>
@@ -239,7 +239,7 @@
                     <connections>
                         <outlet property="dueDate" destination="jkn-Vy-xjs" id="ArR-T1-nrC"/>
                         <outlet property="dueDatePickerView" destination="ESk-Ph-iTN" id="3mC-Zd-vjb"/>
-                        <outlet property="isComplite" destination="17G-pI-j8b" id="mtG-04-eSL"/>
+                        <outlet property="isComplete" destination="17G-pI-j8b" id="mtG-04-eSL"/>
                         <outlet property="notesTextView" destination="ElM-bF-1E5" id="CIK-85-ejp"/>
                         <outlet property="remindMeTextFieldOutlet" destination="Zm3-YI-Aw3" id="Ya2-Of-JDK"/>
                         <outlet property="saveButtonOutlet" destination="ZZV-Cu-tKm" id="r3c-TI-0p1"/>
@@ -288,6 +288,7 @@
         <segue reference="f6y-sI-gPU"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
         <image name="circle" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol toDoCellDelegate: AnyObject {
+    func checkTapped(sender: ToDoTableViewCell)
+}
+
 class ToDoTableViewCell: UITableViewCell {
-    
+
+    weak var delegate: toDoCellDelegate?
     @IBOutlet weak var toDoTitle: UILabel!
     @IBOutlet weak var isCompleteButton: UIButton!
     
@@ -21,6 +26,6 @@ class ToDoTableViewCell: UITableViewCell {
     }
     
     @IBAction func completeButtonTapped(_ sender: Any) {
-        
+        delegate?.checkTapped(sender: self)
     }
 }

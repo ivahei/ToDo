@@ -11,11 +11,11 @@ class NewToDoTableViewController: UITableViewController {
     
     var todo: ToDo?
     var isSelected = false
-    var isDatePickerHiden = true
+    var isDatePickerHidden = true
     let dueDateIndexPath = IndexPath(row: 0, section: 1)
     let dueDatePickerIndexPath = IndexPath(row: 1, section: 1)
 
-    @IBOutlet private var isComplite: UIButton!
+    @IBOutlet private var isComplete: UIButton!
     @IBOutlet private var remindMeTextFieldOutlet: UITextField!
     @IBOutlet private var saveButtonOutlet: UIBarButtonItem!
     @IBOutlet private var dueDate: UILabel!
@@ -35,6 +35,7 @@ class NewToDoTableViewController: UITableViewController {
             saveButtonOutlet.isEnabled = false
             dueDatePickerView.date = Calendar.current.date(byAdding: .hour, value: 1, to: Date()) ?? Date()
         }
+        setIsSelectedImage()
         updateDueDate(dueDatePickerView.date)
     }
     
@@ -61,11 +62,13 @@ class NewToDoTableViewController: UITableViewController {
     @IBAction func isCompleteButtonTapped(_ sender: Any) {
 
         isSelected.toggle()
+        setIsSelectedImage()
+    }
 
+    func setIsSelectedImage() {
         let image = isSelected ?
-        UIImage(systemName: "circlebadge") : UIImage(systemName: "checkmark.circle.fill")
-
-        isComplite.setImage(image, for: .normal)
+        UIImage(systemName: "checkmark.circle.fill") : UIImage(systemName: "circlebadge")
+        isComplete.setImage(image, for: .normal)
     }
 
     func updateDueDate(_ date: Date) {
@@ -83,7 +86,11 @@ class NewToDoTableViewController: UITableViewController {
         let dueDate = dueDatePickerView.date
         let notes = notesTextView.text
         
-        todo = ToDo(title: title, isComplete: isComplete, dueDate: dueDate, notes: notes)
+        todo = ToDo(id: todo?.id ?? UUID().uuidString,
+                    title: title,
+                    isComplete: isComplete,
+                    dueDate: dueDate,
+                    notes: notes)
     }
 }
 
@@ -91,7 +98,7 @@ extension NewToDoTableViewController {
     
     override func tableView(_ tableView: UITableView,
                             heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath == dueDatePickerIndexPath && isDatePickerHiden {
+        if indexPath == dueDatePickerIndexPath && isDatePickerHidden {
             return 0
         }
         return UITableView.automaticDimension
@@ -100,7 +107,7 @@ extension NewToDoTableViewController {
     override func tableView(_ tableView: UITableView,
                             didSelectRowAt indexPath: IndexPath) {
         if indexPath == dueDateIndexPath {
-            isDatePickerHiden.toggle()
+            isDatePickerHidden.toggle()
             updateDueDate(dueDatePickerView.date)
             tableView.reloadData()
         }

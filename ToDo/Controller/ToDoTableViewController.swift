@@ -17,7 +17,7 @@ class ToDoTableViewController: UITableViewController {
 
         navigationItem.leftBarButtonItem = editButtonItem
 
-        todos = ToDo.loadToDos() ?? ToDo.loadSumpleToDos()
+        todos = ToDo.loadToDos() ?? ToDo.loadSampleToDos()
     }
 
     @IBAction func unwindToDoList(segue: UIStoryboardSegue) {
@@ -27,7 +27,7 @@ class ToDoTableViewController: UITableViewController {
         if let todo = sourceViewController?.todo {
             if let indexOfExistingToDo = todos.firstIndex(of: todo) {
                 todos[indexOfExistingToDo] = todo
-                tableView.insertRows(at: [IndexPath(row: indexOfExistingToDo, section: 0)], with: .automatic)
+                tableView.reloadData()
             } else {
                 let newIndexPath = IndexPath(row: todos.count, section: 0)
                 todos.append(todo)
@@ -50,7 +50,7 @@ class ToDoTableViewController: UITableViewController {
     }
 }
 
-extension ToDoTableViewController {
+extension ToDoTableViewController: toDoCellDelegate {
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
         return todos.count
@@ -59,8 +59,10 @@ extension ToDoTableViewController {
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier",
-                                                 for: indexPath)
-        cell.textLabel?.text = todos[indexPath.row].title
+                                                 for: indexPath) as! ToDoTableViewCell
+        cell.delegate = self
+        cell.toDoTitle.text = todos[indexPath.row].title
+        cell.isCompleteButton.isSelected = todos[indexPath.row].isComplete
 
         return cell
     }
@@ -74,6 +76,15 @@ extension ToDoTableViewController {
         if editingStyle == .delete {
             todos.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+
+    func checkTapped(sender: ToDoTableViewCell) {
+        if let indexPath = tableView.indexPath(for: sender) {
+            var todo = todos[indexPath.row]
+            todo.isComplete.toggle()
+            todos[indexPath.row] = todo
+            tableView.reloadRows(at: [indexPath], with: .automatic)
         }
     }
 }

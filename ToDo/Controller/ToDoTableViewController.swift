@@ -34,6 +34,7 @@ class ToDoTableViewController: UITableViewController {
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
         }
+        ToDo.saveToDos(todos)
     }
 
     @IBSegueAction func editToDo(_ coder: NSCoder, sender: Any?) -> NewToDoTableViewController? {
@@ -76,6 +77,7 @@ extension ToDoTableViewController: toDoCellDelegate {
         if editingStyle == .delete {
             todos.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            ToDo.saveToDos(todos)
         }
     }
 
@@ -85,6 +87,7 @@ extension ToDoTableViewController: toDoCellDelegate {
             todo.isComplete.toggle()
             todos[indexPath.row] = todo
             tableView.reloadRows(at: [indexPath], with: .automatic)
+            ToDo.saveToDos(todos)
         }
     }
 }

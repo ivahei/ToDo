@@ -60,7 +60,6 @@ class NewToDoTableViewController: UITableViewController {
     }
     
     @IBAction func isCompleteButtonTapped(_ sender: Any) {
-
         isSelected.toggle()
         setIsSelectedImage()
     }

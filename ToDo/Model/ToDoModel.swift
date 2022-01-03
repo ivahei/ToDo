@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ToDo: Equatable {
+struct ToDo: Equatable, Codable {
     let id: String
     var title: String
     var isComplete: Bool
@@ -22,7 +22,15 @@ struct ToDo: Equatable {
     }()
 
     static func loadToDos() -> [ToDo]? {
-        return nil
+        guard let codedToDos = try? Data(contentsOf: archiveURL) else {return nil}
+        let plistDecoder = PropertyListDecoder()
+        return try? plistDecoder.decode(Array<ToDo>.self, from: codedToDos)
+    }
+
+    static func saveToDos(_ todos: [ToDo]) {
+        let plistEncoder = PropertyListEncoder()
+        let codedToDos = try? plistEncoder.encode(todos)
+        try? codedToDos?.write(to: archiveURL, options: .noFileProtection)
     }
 
     static func loadSampleToDos() -> [ToDo] {
@@ -36,4 +44,7 @@ struct ToDo: Equatable {
     static func ==(lhs: Self, rhs: Self) -> Bool {
         return lhs.id == rhs.id
     }
+
+    static let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    static let archiveURL = documentDirectory.appendingPathComponent("todos").appendingPathExtension("plist")
 }

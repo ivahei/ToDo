@@ -60,12 +60,13 @@ extension ToDoTableViewController: toDoCellDelegate {
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier",
-                                                 for: indexPath) as! ToDoTableViewCell
-        cell.delegate = self
-        cell.toDoTitle.text = todos[indexPath.row].title
-        cell.isCompleteButton.isSelected = todos[indexPath.row].isComplete
-
-        return cell
+                                                 for: indexPath) as? ToDoTableViewCell
+        if let cell = cell {
+            cell.delegate = self
+            cell.toDoTitle.text = todos[indexPath.row].title
+            cell.isCompleteButton.isSelected = todos[indexPath.row].isComplete
+        }
+        return cell!
     }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath)
